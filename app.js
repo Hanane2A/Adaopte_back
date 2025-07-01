@@ -6,7 +6,7 @@ const port = 3000;
 
 app.get('/', (req , res)=> {
 
-    res.send('Bonjour c est camille et Hanane');
+    res.send("Bonjour c'est Camille et Hanane 🤩");
 });
 
 app.listen(port, ()=>{
