@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model adopters {
+  id                  BigInt  @id @default(autoincrement())
+  name                String
+  tel                 String?
+  email               String? @unique
+  age_adopter         Int?
+  adoption_motivation String?
+  city_id             BigInt?
+  cities              cities? @relation(fields: [city_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_city")
+}
+
+model adoptions {
+  id          Int       @id @default(autoincrement())
+  animal_id   Int?
+  adopter_id  Int?
+  adoption_at DateTime? @db.Date
+}
+
+model animal_shelter {
+  id           Int         @id @default(autoincrement())
+  city_id      Int?
+  volunteer_id Int?
+  cities       cities?     @relation(fields: [city_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  volunteers   volunteers? @relation(fields: [volunteer_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  animals      animals[]
+}
+
+model animals {
+  id                Int             @id @default(autoincrement())
+  name              String?
+  age               Int?
+  breed             String?
+  type              String?
+  description       String?
+  sexe              String?
+  image_url         String?
+  statut            String?         @default("disponible")
+  date_arrivee      DateTime?       @db.Date
+  animal_shelter_id Int?
+  animal_shelter    animal_shelter? @relation(fields: [animal_shelter_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model cities {
+  id             BigInt           @id @default(autoincrement())
+  name           String
+  zipcode        String
+  adopters       adopters[]
+  animal_shelter animal_shelter[]
+}
+
+model volunteers {
+  id                Int              @id @default(autoincrement())
+  firstname         String?
+  name              String?
+  email             String?
+  mdp               String?
+  city_id           Int?
+  availability      DateTime?        @db.Date
+  animal_shelter_id Int?
+  motivation        String?          @db.VarChar
+  created_at        DateTime?        @db.Date
+  update_at         DateTime?        @db.Date
+  animal_shelter    animal_shelter[]
+}
