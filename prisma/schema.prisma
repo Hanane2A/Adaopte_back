@@ -8,67 +8,73 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model adopters {
-  id                  BigInt  @id @default(autoincrement())
+model adopter {
+  adopter_id          Int        @id @default(autoincrement())
   name                String
-  tel                 String?
-  email               String? @unique
-  age_adopter         Int?
+  address             String
+  city_id             Int?
+  tel                 String?    @unique
+  email               String?    @unique
+  date_birth          DateTime?  @db.Date
   adoption_motivation String?
-  city_id             BigInt?
-  cities              cities? @relation(fields: [city_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_city")
+  city                city?      @relation(fields: [city_id], references: [city_id], onUpdate: NoAction, map: "fk_city")
+  adoption            adoption[]
 }
 
-model adoptions {
-  id          Int       @id @default(autoincrement())
+model adoption {
+  adoption_id Int       @id @default(autoincrement())
   animal_id   Int?
   adopter_id  Int?
   adoption_at DateTime? @db.Date
+  adopter     adopter?  @relation(fields: [adopter_id], references: [adopter_id], onDelete: Restrict, onUpdate: NoAction, map: "fk_adopter")
+  animal      animal?   @relation(fields: [animal_id], references: [animal_id], onDelete: Restrict, onUpdate: NoAction, map: "fk_animal")
+}
+
+model animal {
+  animal_id         Int             @id @default(autoincrement())
+  name              String
+  date_birth        DateTime?       @db.Date
+  breed             String?
+  type              String?
+  description       String?         @db.VarChar
+  sexe              String?
+  animal_shelter_id Int?
+  img_url           String?
+  adoption          adoption[]
+  animal_shelter    animal_shelter? @relation(fields: [animal_shelter_id], references: [animal_shelter_id], onUpdate: NoAction, map: "fk_animal_shelter")
 }
 
 model animal_shelter {
-  id           Int         @id @default(autoincrement())
-  city_id      Int?
-  volunteer_id Int?
-  cities       cities?     @relation(fields: [city_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  volunteers   volunteers? @relation(fields: [volunteer_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  animals      animals[]
+  animal_shelter_id Int        @id @default(autoincrement())
+  name              String
+  address           String?
+  city_id           Int?
+  volunteer_id      Int?
+  animal            animal[]
+  city              city?      @relation(fields: [city_id], references: [city_id], onDelete: Restrict, onUpdate: NoAction, map: "fk_city")
+  volunteer         volunteer? @relation(fields: [volunteer_id], references: [volunteer_id], onUpdate: NoAction, map: "fk_volunteer")
 }
 
-model animals {
-  id                Int             @id @default(autoincrement())
-  name              String?
-  age               Int?
-  breed             String?
-  type              String?
-  description       String?
-  sexe              String?
-  image_url         String?
-  statut            String?         @default("disponible")
-  date_arrivee      DateTime?       @db.Date
-  animal_shelter_id Int?
-  animal_shelter    animal_shelter? @relation(fields: [animal_shelter_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-}
-
-model cities {
-  id             BigInt           @id @default(autoincrement())
+model city {
+  city_id        Int              @id @default(autoincrement())
   name           String
   zipcode        String
-  adopters       adopters[]
+  adopter        adopter[]
   animal_shelter animal_shelter[]
+  volunteer      volunteer[]
 }
 
-model volunteers {
-  id                Int              @id @default(autoincrement())
-  firstname         String?
-  name              String?
-  email             String?
-  mdp               String?
-  city_id           Int?
-  availability      DateTime?        @db.Date
-  animal_shelter_id Int?
-  motivation        String?          @db.VarChar
-  created_at        DateTime?        @db.Date
-  update_at         DateTime?        @db.Date
-  animal_shelter    animal_shelter[]
+model volunteer {
+  volunteer_id   Int              @id @default(autoincrement())
+  firstname      String?
+  name           String?
+  email          String?
+  mdp            String?
+  city_id        Int?
+  availability   DateTime?        @db.Date
+  motivation     String?          @db.VarChar
+  created_at     DateTime?        @db.Date
+  update_at      DateTime?        @db.Date
+  animal_shelter animal_shelter[]
+  city           city?            @relation(fields: [city_id], references: [city_id], onUpdate: NoAction, map: "fk_city")
 }
