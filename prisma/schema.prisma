@@ -45,14 +45,13 @@ model animal {
 }
 
 model animal_shelter {
-  animal_shelter_id Int        @id @default(autoincrement())
+  animal_shelter_id Int      @id @default(autoincrement())
   name              String
   address           String?
   city_id           Int?
   volunteer_id      Int?
   animal            animal[]
-  city              city?      @relation(fields: [city_id], references: [city_id], onDelete: Restrict, onUpdate: NoAction, map: "fk_city")
-  volunteer         volunteer? @relation(fields: [volunteer_id], references: [volunteer_id], onUpdate: NoAction, map: "fk_volunteer")
+  city              city?    @relation(fields: [city_id], references: [city_id], onDelete: Restrict, onUpdate: NoAction, map: "fk_city")
 }
 
 model city {
@@ -65,16 +64,15 @@ model city {
 }
 
 model volunteer {
-  volunteer_id   Int              @id @default(autoincrement())
-  firstname      String?
-  name           String?
-  email          String?
-  mdp            String?
-  city_id        Int?
-  availability   DateTime?        @db.Date
-  motivation     String?          @db.VarChar
-  created_at     DateTime?        @db.Date
-  update_at      DateTime?        @db.Date
-  animal_shelter animal_shelter[]
-  city           city?            @relation(fields: [city_id], references: [city_id], onUpdate: NoAction, map: "fk_city")
+  volunteer_id Int       @id @default(autoincrement())
+  firstname    String?
+  name         String?
+  email        String    @unique
+  mdp          String
+  city_id      Int?
+  availability DateTime? @db.Date
+  motivation   String?   @db.VarChar
+  created_at   DateTime? @db.Date
+  update_at    DateTime? @db.Date
+  city         city?     @relation(fields: [city_id], references: [city_id], onUpdate: NoAction, map: "fk_city")
 }

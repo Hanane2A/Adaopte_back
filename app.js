@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const port = 3001;
 
-const animalRouter = require('./animal'); // importe BDD animal
+const animalRouter = require('./routes/animal'); // importe BDD animal
 
 
 app.use(express.json()); // Middleware pour parser les requêtes JSON (très important pour les requêtes POST/PUT)
