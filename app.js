@@ -1,4 +1,4 @@
-// fichier appel express et routes 
+// fichier appel express et routes =======================================
 
 const express = require('express');
 const app = express();
@@ -20,3 +20,7 @@ app.use('/animal', animalRouter);
 app.listen(port, ()=>{
     console.log(`Serveur adaopteBack sur http://localhost:${port}`);
 });
+
+
+//la partie authentification:================================================
+
