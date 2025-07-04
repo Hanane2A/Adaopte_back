@@ -5,7 +5,7 @@ const app = express();
 const port = 3001;
 
 const animalRouter = require('./routes/animal'); // importe BDD animal
-
+const adopterRouter = require('./routes/adopter');
 
 app.use(express.json()); // Middleware pour parser les requêtes JSON (très important pour les requêtes POST/PUT)
 
@@ -14,9 +14,7 @@ app.get('/', (req , res)=> {
 });
 
 app.use('/animal', animalRouter);
-
-
-
+app.use('/adopter', adopterRouter);
 
 
 app.listen(port, ()=>{

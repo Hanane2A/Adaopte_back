@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 
+const adopterRouter = require('./routes/adopter');
 
 const prisma = new PrismaClient()
 
