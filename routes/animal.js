@@ -1,5 +1,5 @@
 const express = require ('express');
-const {PrismaClient} = require ('../generated/prisma/client');
+const {PrismaClient} = require ('../generated/prisma');
 // const {PrismaClient} = require ('@prisma/client'); je ne comprends pas !!
 
 
