@@ -16,7 +16,7 @@ const statuses = ['disponible', 'adopté'];
 
 const getBreedForType = (type) => {
     const breeds = {
-        chien: ['Labrador', 'Berger Allemand', 'Shiba Inu', 'Bichon', 'Bulledog Anglais', 'Chihuahua', 'Teckel', 'Bouvier bernois', 'Beagle', 'Boxer'],
+        chien: ['Labrador', 'Berger Allemand', 'Shiba Inu', 'Bichon', 'Bulldog Anglais', 'Chihuahua', 'Teckel', 'Bouvier bernois', 'Beagle', 'Boxer'],
         chat: ['Siamois', 'Maine Coon', 'Persan', 'Chartreux', 'Bengal', 'Ragdoll', 'British Shorthair', 'Norvégien', 'Sphynx', 'Bleu Russe'],
         lapin: ['Bélier', 'Nain', 'Angora', 'Rex', 'Satin', 'Tête de Lion', 'Chinchilla', 'Fauve de Bourgogne', 'Papillon', 'Californien'],
         equide: ['Pur-sang', 'Camarguais', 'Frison', 'Haflinger', 'Quarter Horse', 'Paint Horse', 'Mérens', 'Shetland', 'Welsh', 'Connemara'],
