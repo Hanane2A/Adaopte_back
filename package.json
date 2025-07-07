@@ -21,6 +21,7 @@
   "dependencies": {
     "@faker-js/faker": "^9.9.0",
     "@prisma/client": "^6.11.0",
+    "dotenv": "^17.0.1",
     "express": "^5.1.0",
     "pg": "^8.16.3"
   },
