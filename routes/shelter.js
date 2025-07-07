@@ -21,7 +21,7 @@ router.get('/', async(req, res)=>{
         }
 });
 
-//route POSTn(piur ajouter une donnée)
+//route POST(pour ajouter une donnée)
 router.post('/', async(req, res)=>{
 
     const{name, address, city_id, volunteer_id} = req.body;
@@ -57,9 +57,33 @@ router.put('/:id', async(req, res)=>{ // faudra revoir l'info /:id
     }
 });
 
+//route delete (pour supprimer une donnée)
 
+router.delete('/:id' , async (req, res) => {
 
+    const id = parseInt(req.params.id);
 
+    try{
+        const shelter = await prisma.animal_shelter.findUnique({
+            where: {animal_shelter_id: id}
+        });
+
+        if(!shelter){
+             return res.status(404).json({ message: "Shelter non trouvé." });
+        }
+        const deletedShelter = await prisma.animal_shelter.delete({
+
+            where:{ animal_shelter_id: id},
+        
+        });
+
+        res.json(deletedShelter);
+} catch (error){
+    console.error("Erreur lors de la suppression : " );
+    res.status(500).json({ error: "Erreur BDD Shelter"})
+    
+}
+});
 
 
 module.exports = router;
