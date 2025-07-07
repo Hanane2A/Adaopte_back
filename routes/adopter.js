@@ -55,4 +55,22 @@ router.put('/:id', async (req, res) => {
 });
 
 
+// DELETE
+router.delete('/:id', async (req, res) => {
+const id = parseInt(req.params.id);
+try {
+  const deleteAdopter = await prisma.adopter.delete({
+    where: {adopter_id: id},
+  })
+  res.json({ message: 'Adoptant.e supprimé.e avec succès'})
+} catch (error) {
+  console.error(error);
+  res.status(500).json({error: " Erreur lors de la suppression" });
+}
+});
+
+
+
+
+
 module.exports = router;
