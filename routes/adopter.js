@@ -62,7 +62,7 @@ try {
   const deleteAdopter = await prisma.adopter.delete({
     where: {adopter_id: id},
   })
-  res.json({ message: 'Adoptant.e supprimé.e avec succès'})
+  res.json({ message: 'Adoptant.te supprimé.e avec succès'})
 } catch (error) {
   console.error(error);
   res.status(500).json({error: " Erreur lors de la suppression" });
