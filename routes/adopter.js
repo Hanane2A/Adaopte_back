@@ -49,7 +49,7 @@ router.put('/:id', async (req, res) => {
     });
     res.json(updatedAdopter);
   } catch (error) {
-        console.error(error); // <= Affiche l'erreur dans la console
+        console.error(error); // l'erreur console
     res.status(500).json({ error: "Erreur lors de la mise à jour" });
   }
 });
