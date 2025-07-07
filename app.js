@@ -1,22 +1,22 @@
 // fichier appel express et routes 
+import express from 'express'; // import from et non const require
+import animalsRouter from './api/animals/route.js'; // chemin vers ton routeur
+import dotenv from 'dotenv';
+import pool from './api/animals/route.js';
 
-const express = require('express');
+dotenv.config();
+
 const app = express();
 const port = 3001;
 
-const animalRouter = require('./animal'); // importe BDD animal
+app.use(express.json()); // pour lire les body JSON (POST, PUT)
 
-
-app.use(express.json()); // Middleware pour parser les requêtes JSON (très important pour les requêtes POST/PUT)
-
-app.get('/', (req , res)=> {
-    res.send("Bonjour c'est Camille et Hanane 🤩");
+app.get('/', (req, res) => {
+  res.send("Bonjour c'est Camille et Hanane 🤩");
 });
 
-app.use('/animal', animalRouter);
+app.use('/api/animals', animalsRouter); // toutes les routes animales
 
-
-
-app.listen(port, ()=>{
-    console.log(`Serveur adaopteBack sur http://localhost:${port}`);
+app.listen(port, () => {
+  console.log(`Serveur adaopteBack lancé sur http://localhost:${port}`);
 });
