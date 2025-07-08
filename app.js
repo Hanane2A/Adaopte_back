@@ -10,6 +10,7 @@ const animalRouter = require('./routes/animal'); // importe BDD animal
 const adopterRouter = require('./routes/adopter');
 const adoptionRouter = require('./routes/adoption');
 const shelterRouter = require('./routes/shelter'); // importe BDD shelter
+const volunteerRouter = require('./routes/volunteer');
 
 const authRouter = require('./routes/auth'); // route authentification 
 
@@ -24,6 +25,7 @@ app.use('/animal', animalRouter);
 app.use('/adopter', adopterRouter);
 app.use('/adoption', adoptionRouter);
 app.use('/shelter', shelterRouter);
+app.use('/volunteer', volunteerRouter);
 
 app.use('/auth', authRouter);
 
