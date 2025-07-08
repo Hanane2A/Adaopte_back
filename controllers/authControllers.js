@@ -5,9 +5,9 @@ const { PrismaClient } = require('../generated/prisma');
 const prisma = new PrismaClient();
 
 exports.register = async (req, res) => {
-    const { email, password, firstname, name } = req.body;
+    const { email, mdp, firstname, name } = req.body;
 
-    if (!email || !password) {
+    if (!email || !mdp) {
         return res.status(400).json({ message: 'Veuillez fournir un email et un mot de passe.' });
     }
 
@@ -17,12 +17,12 @@ exports.register = async (req, res) => {
             return res.status(409).json({ message: 'Cet email est déjà utilisé.' });
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedmdp = await bcrypt.hash(mdp, 10);
 
         const newVolunteer = await prisma.volunteer.create({
             data: {
                 email,
-                mdp: hashedPassword,
+                mdp: hashedmdp,
                 firstname: firstname || null,
                 name: name || null,
             },
@@ -38,9 +38,9 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
     console.log("je suis dans login");
     
-    const { email, password } = req.body;
+    const { email, mdp } = req.body;
 
-    if (!email || !password) {
+    if (!email || !mdp) {
         return res.status(400).json({ message: 'Veuillez fournir un email et un mot de passe.' });
     }
 
@@ -50,7 +50,7 @@ exports.login = async (req, res) => {
             return res.status(401).json({ message: 'Je ne trouve pas cette personne!' });
         }
 
-        // const isMatch = await bcrypt.compare(password, volunteer.mdp);
+        // const isMatch = await bcrypt.compare(mdp, volunteer.mdp);
         // if (!isMatch) {
         //     return res.status(401).json({ message: 'Email ou mot de passe incorrect.' });
         // }
