@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { Client } from 'pg';
+import { Client } from 'prisma';
 
 const client = new Client({
     user: 'neondb_owner',
