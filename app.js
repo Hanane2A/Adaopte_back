@@ -7,6 +7,8 @@ const port = 3001;
 const animalRouter = require('./routes/animal'); // importe BDD animal
 const adopterRouter = require('./routes/adopter');
 const adoptionRouter = require('./routes/adoption');
+const shelterRouter = require('./routes/shelter'); // importe BDD shelter
+
 
 app.use(express.json()); // Middleware pour parser les requêtes JSON (très important pour les requêtes POST/PUT)
 
@@ -17,6 +19,9 @@ app.get('/', (req , res)=> {
 app.use('/animal', animalRouter);
 app.use('/adopter', adopterRouter);
 app.use('/adoption', adoptionRouter);
+app.use('/shelter', shelterRouter);
+
+
 
 app.listen(port, ()=>{
     console.log(`Serveur adaopteBack sur http://localhost:${port}`);
