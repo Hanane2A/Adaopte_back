@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "dev": "node app.js",
+    "generate": "npx prisma generate",
+    "migrate": "npx prisma migrate dev",
+    "start": "npm run generate && node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,13 +22,14 @@
   "homepage": "https://github.com/Hanane2A/Adaopte_back#readme",
   "description": "",
   "dependencies": {
-    "@prisma/client": "^6.11.0",
+    "@prisma/client": "^6.11.1",
     "bcryptjs": "^3.0.2",
     "cookie-parser": "^1.4.7",
+    "dotenv": "^17.1.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
-    "prisma": "^6.11.0"
+    "prisma": "^6.11.1"
   }
 }

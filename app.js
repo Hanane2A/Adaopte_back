@@ -1,13 +1,17 @@
 // fichier appel express et routes =======================================
 
+require('dotenv').config(); // Charge les variables d'environnement
+
 const express = require('express');
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 const animalRouter = require('./routes/animal'); // importe BDD animal
 const adopterRouter = require('./routes/adopter');
 const adoptionRouter = require('./routes/adoption');
 const shelterRouter = require('./routes/shelter'); // importe BDD shelter
+
+const authRouter = require('./routes/auth'); // route authentification 
 
 
 app.use(express.json()); // Middleware pour parser les requêtes JSON (très important pour les requêtes POST/PUT)
@@ -21,6 +25,8 @@ app.use('/adopter', adopterRouter);
 app.use('/adoption', adoptionRouter);
 app.use('/shelter', shelterRouter);
 
+app.use('/auth', authRouter);
+
 
 
 app.listen(port, ()=>{
@@ -28,5 +34,4 @@ app.listen(port, ()=>{
 });
 
 
-//la partie authentification:================================================
 
