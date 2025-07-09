@@ -3,8 +3,17 @@
 require('dotenv').config(); // Charge les variables d'environnement
 
 const express = require('express');
+const cors = require('cors');
+
+
 const app = express();
 const port = process.env.PORT || 3001;
+
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+
+}));
 
 const animalRouter = require('./routes/animal'); // importe BDD animal
 const adopterRouter = require('./routes/adopter');
