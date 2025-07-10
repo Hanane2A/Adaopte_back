@@ -23,7 +23,7 @@ router.get('/', async(req, res)=>{
 
 router.post('/', async(req, res)=>{
 
-    const {name, date_birth, breed, type,   discription, sexe, animal_shelter_id, img_url} = req.body;
+    const {name, date_birth, breed, type,   description, sexe, animal_shelter_id, img_url} = req.body;
     try{
         const newAnimal = await prisma.animal.create({
             data:{
@@ -31,9 +31,8 @@ router.post('/', async(req, res)=>{
                 date_birth,
                 breed,
                 type,
-                discription,
+                description,
                 sexe,
-                animal_id,
                 animal_shelter_id,
                 img_url,
             },

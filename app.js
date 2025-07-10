@@ -20,6 +20,7 @@ const adopterRouter = require('./routes/adopter');
 const adoptionRouter = require('./routes/adoption');
 const shelterRouter = require('./routes/shelter'); // importe BDD shelter
 const volunteerRouter = require('./routes/volunteer');
+const cityRouter = require('./routes/city');
 
 const authRouter = require('./routes/auth'); // route authentification 
 
@@ -35,7 +36,8 @@ app.use('/adopter', adopterRouter);
 app.use('/adoption', adoptionRouter);
 app.use('/shelter', shelterRouter);
 app.use('/volunteer', volunteerRouter);
-
+app.use('/city', cityRouter)
+;
 app.use('/auth', authRouter);
 
 
